@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE OFFICIAL | バスケットボール審判の軌跡</title>
+    <!-- 高級感のあるフォント -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Serif+JP:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0b0b0b;
+            --card-bg: #141414;
+            --text-main: #e0e0e0;
+            --text-muted: #999;
+            --gold: #c9a050;
+            --gold-gradient: linear-gradient(135deg, #c9a050 0%, #eacda3 100%);
+            --border-color: #333;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Noto Serif JP', serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cinzel', serif; /* 英数字はCinzel */
+            font-weight: 700;
+            margin: 0;
+        }
+
+        /* 日本語見出し用の調整 */
+        .jp-title {
+            font-family: 'Noto Serif JP', serif;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        /* Hero Section */
+        header {
+            height: 80vh; /* 少し短くして下のコンテンツを見せる */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+            text-align: center;
+            position: relative;
+            padding: 20px;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            margin-top: 10px;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 5%;
+            border-bottom: 1px solid #222;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .section-header span {
+            display: block;
+            width: 50px;
+            height: 2px;
+            background: var(--gold);
+            margin: 0 auto 20px;
+        }
+
+        /* --------------------------------------------------
+           History Section (改善版: 自動折り返しグリッド)
+           横スクロールを廃止し、画面幅に合わせて並べるスタイル
+        -------------------------------------------------- */
+        .history-container {
+            display: flex;
+            flex-wrap: wrap; /* 画面幅に合わせて折り返す */
+            justify-content: center;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .history-card {
+            background: var(--card-bg);
+            border: 1px solid #333;
+            width: 300px; /* カードの幅 */
+            padding: 30px 20px;
+            position: relative;
+            transition: transform 0.3s;
+            border-top: 3px solid var(--gold);
+        }
+
+        .history-card:hover {
+            transform: translateY(-5px);
+            background: #1a1a1a;
+        }
+
+        .year-label {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+            display: block;
+            text-align: center;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .history-content h4 {
+            color: #fff;
+            margin: 15px 0 5px;
+            font-size: 1.1rem;
+            border-left: 3px solid var(--gold);
+            padding-left: 10px;
+        }
+
+        .history-content p {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .history-sub {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: -10px;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        /* Whistle Evolution Text */
+        .evolution-text {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: justify;
+        }
+        
+        .evolution-block {
+            margin-bottom: 40px;
+            padding-left: 20px;
+            border-left: 2px solid #333;
+        }
+
+        .evolution-block h3 {
+            color: var(--text-main);
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+        
+        .evolution-block span.highlight {
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        /* --------------------------------------------------
+           Molten Gallery (指定画像対応)
+        -------------------------------------------------- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .whistle-card {
+            background: var(--card-bg);
+            border: 1px solid #222;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .whistle-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border-color: var(--gold);
+        }
+
+        .card-image-container {
+            background: #fff; /* 商品が見やすいように白背景 */
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 250px;
+        }
+
+        .card-image-container img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            transition: transform 0.5s;
+        }
+
+        .whistle-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .card-details {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-details h3 {
+            color: #fff;
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            font-family: 'Cinzel', 'Noto Serif JP', serif;
+        }
+
+        .model-number {
+            font-size: 0.8rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .card-details p {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        .feature-tag {
+            font-size: 0.75rem;
+            color: #888;
+            border: 1px solid #444;
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 2px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px;
+            text-align: center;
+            background: #000;
+            border-top: 1px solid #222;
+            color: #555;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            .history-card { width: 100%; margin-bottom: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>THE OFFICIAL</h1>
+    <p class="jp-title">バスケットボール審判の美学と歴史</p>
+</header>
+
+<!-- 歴史セクション -->
+<section id="history">
+    <div class="section-header">
+        <h2>HISTORY</h2>
+        <span></span>
+        <p style="color:#888;">バスケの歴史 vs 審判の進化</p>
+    </div>
+
+    <!-- 
+       横スクロール廃止: flex-wrapで画面幅に合わせて自動で改行されるグリッド表示にしました。
+       全てのカードが隠れることなく表示されます。
+    -->
+    <div class="history-container">
+        
+        <!-- 1891 -->
+        <div class="history-card">
+            <span class="year-label">1891</span>
+            <div class="history-content">
+                <h4>バスケ誕生</h4>
+                <p>J.ネイスミス博士が考案。当初はサッカーボールと桃の籠を使用。</p>
+                <div style="border-top:1px dashed #444; margin:15px 0;"></div>
+                <h4>審判の始まり</h4>
+                <p>当初は「レフェリー」と「アンパイア」に分かれ、権限も限定的でした。</p>
+            </div>
+        </div>
+
+        <!-- 1936 -->
+        <div class="history-card">
+            <span class="year-label">1936</span>
+            <div class="history-content">
+                <h4>ベルリン五輪</h4>
+                <p>オリンピック正式種目に採用。屋外のテニスコートで行われました。</p>
+                <div style="border-top:1px dashed #444; margin:15px 0;"></div>
+                <h4>ルールの国際化</h4>
+                <p>FIBA設立により、世界共通の審判基準が模索され始めました。</p>
+            </div>
+        </div>
+
+        <!-- 1970s -->
+        <div class="history-card">
+            <span class="year-label">1970s</span>
+            <div class="history-content">
+                <h4>3ポイント導入</h4>
+                <p>NBAで3Pライン導入。ゲームエリアが広がり、より運動量が必要に。</p>
+                <div style="border-top:1px dashed #444; margin:15px 0;"></div>
+                <h4>メカニクス確立</h4>
+                <p>リード・トレイルの2人制メカニクス（動き方）の理論が進化。</p>
+            </div>
+        </div>
+
+        <!-- 1988 -->
+        <div class="history-card">
+            <span class="year-label">1988</span>
+            <div class="history-content">
+                <h4>高速化するゲーム</h4>
+                <p>選手のフィジカル向上により、2人の目では追いきれないプレーが増加。</p>
+                <div style="border-top:1px dashed #444; margin:15px 0;"></div>
+                <h4>3人制 (3PO) 導入</h4>
+                <p>NBAが3人制を本格採用。死角を減らす現代バスケの標準へ。</p>
+            </div>
+        </div>
+
+        <!-- 2000s -->
+        <div class="history-card">
+            <span class="year-label">2000s</span>
+            <div class="history-content">
+                <h4>ブザービーター問題</h4>
+                <p>コンマ数秒の勝敗判定が人間の目の限界を超える。</p>
+                <div style="border-top:1px dashed #444; margin:15px 0;"></div>
+                <h4>ビデオ判定 (IRS)</h4>
+                <p>テクノロジーの導入。正確性を担保するためのシステムが確立。</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ホイッスルの歴史テキスト -->
+<section id="whistle-evolution">
+    <div class="section-header">
+        <h2>EVOLUTION</h2>
+        <span></span>
+        <p style="color:#888;">音の歴史と進化</p>
+    </div>
+
+    <div class="evolution-text">
+        <div class="evolution-block">
+            <h3>第一世代：金属とコルクの時代</h3>
+            <p>
+                かつて審判は、警察官などが使う<span class="highlight">金属製のホイッスル</span>を使用していました。中には「コルク玉」が入っており、それが震えることで音を出していましたが、冬場に唾液でコルクが凍りついたり、強く吹きすぎて音が詰まる欠点がありました。
+            </p>
+        </div>
+        <div class="evolution-block">
+            <h3>第二世代：プラスチックと「玉なし」革命</h3>
+            <p>
+                「FOX 40」の登場により、<span class="highlight">ピーレス（玉なし）構造</span>が標準となりました。プラスチック製で錆びず、内部の共鳴だけで音を出すため、どんなに強く吹いても音が止まりません。これにより、審判は全力で笛を吹けるようになりました。
+            </p>
+        </div>
+        <div class="evolution-block">
+            <h3>第三世代：バスケットボール専用チューニング</h3>
+            <p>
+                そして現代。Moltenはアリーナの歓声にかき消されない<span class="highlight">特定の周波数（4.10kHz & 3.74kHz）</span>を開発。さらに、激しい動きの中で噛んでしまっても壊れない「チタンフレーム」や、くわえやすい形状など、バスケットボールに特化した進化を遂げています。
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Molten ホイッスルギャラリー -->
+<section id="gallery">
+    <div class="section-header">
+        <h2>COLLECTION</h2>
+        <span></span>
+        <p style="color:#888;">プロフェッショナルのためのツール</p>
+    </div>
+
+    <div class="gallery-grid">
+        
+        <!-- 1. BLAZZA (ブラッツァ) -->
+        <div class="whistle-card">
+            <div class="card-image-container">
+                <img src="https://shop.moltensports.jp/cdn/shop/products/RA0040-K_S1R.jpg?v=1642669153&width=640" alt="Molten BLAZZA">
+            </div>
+            <div class="card-details">
+                <h3>ブラッツァ</h3>
+                <div class="model-number">RA0040-K</div>
+                <p>
+                    バスケットボール審判専用の最高峰モデル。
+                    立ち上がりの強い、太くキレのある音が特徴。
+                    チタンフレームを搭載し、柔らかいマウスピースでありながら、噛み割れを完全に防ぎます。
+                </p>
+                <div>
+                    <span class="feature-tag">チタンフレーム</span>
+                    <span class="feature-tag">バスケ専用音響</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. DOLPHIN B (ドルフィンB) -->
+        <div class="whistle-card">
+            <div class="card-image-container">
+                <img src="https://shop.moltensports.jp/cdn/shop/products/RA0080-K_M1L.jpg?v=1642762026&width=640" alt="Molten Dolphin B">
+            </div>
+            <div class="card-details">
+                <h3>ドルフィン B</h3>
+                <div class="model-number">RA0080-K</div>
+                <p>
+                    アリーナに響き渡る大音量。
+                    バスケットボールのコートで最もよく通る周波数にチューニングされています。
+                    噛み割れにくい高強度のマウスピースを採用した定番モデル。
+                </p>
+                <div>
+                    <span class="feature-tag">大音量</span>
+                    <span class="feature-tag">高強度</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. FOX 40 -->
+        <div class="whistle-card">
+            <div class="card-image-container">
+                <img src="https://shop.moltensports.jp/cdn/shop/products/FOX40.jpg?v=1642750331&width=640" alt="FOX 40">
+            </div>
+            <div class="card-details">
+                <h3>FOX 40</h3>
+                <div class="model-number">FOX40 (Classic)</div>
+                <p>
+                    世界中の審判が使用する「コルク玉なし」ホイッスルの元祖。
+                    カナダ製。音が非常に大きく、水洗いも可能。
+                    構造がシンプルで壊れにくく、あらゆるスポーツで使用されるスタンダード。
+                </p>
+                <div>
+                    <span class="feature-tag">コルク玉なし元祖</span>
+                    <span class="feature-tag">世界標準</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. DOLPHIN Bu (ドルフィンBu) -->
+        <div class="whistle-card">
+            <div class="card-image-container">
+                <img src="https://shop.moltensports.jp/cdn/shop/files/IM_RA0120-K_M01_inter.jpg?v=1750657925&width=640" alt="Molten Dolphin Bu">
+            </div>
+            <div class="card-details">
+                <h3>ドルフィン Bu</h3>
+                <div class="model-number">RA0120-K</div>
+                <p>
+                    「ドルフィンB」の性能を受け継ぎつつ、くわえやすさを追求したモデル。
+                    上下対称（シンメトリー）の形状で、咄嗟の時でも向きを気にせずくわえられます。
+                    タンギング（舌使い）がしやすいマウスピース形状が特徴。
+                </p>
+                <div>
+                    <span class="feature-tag">上下対称</span>
+                    <span class="feature-tag">タンギング容易</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2023 Basketball Referee Fan Site.</p>
+</footer>
+
+</body>
+</html>
